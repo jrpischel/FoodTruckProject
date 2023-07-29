@@ -95,7 +95,7 @@ public class FoodTruckApp {
 			}
 		}
 		avgRatings = tallyRatings / counter;
-		System.out.printf("The average food truck rating is: ");
+		System.out.print("The average food truck rating is: ");
 		System.out.printf("%.2f\n", avgRatings);
 		
 	}
