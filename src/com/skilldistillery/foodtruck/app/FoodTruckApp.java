@@ -33,7 +33,7 @@ public class FoodTruckApp {
 			i++;
 			System.out.print("Please enter a truck name or quit to continue: ");
 			name = kb.nextLine();
-		} while (!name.equals("quit"));
+		} while (!name.equalsIgnoreCase("quit"));
 
 		do {
 			menu2();
@@ -50,12 +50,14 @@ public class FoodTruckApp {
 				highestRating(foodTrucks);
 				break;
 			case 4:
-				System.out.println("Good Bye");
+				System.err.println("***************************************************");
+				System.err.println("* Thank you for visiing our Food Trucks, Good Bye *");
+				System.err.println("***************************************************");
 				break;
 			default:
-				System.err.println( "**************************************\n" +
-									"* Invalid selection please try again *\n" +
-									"**************************************");
+				System.err.println("**************************************\n"
+								 + "* Invalid selection please try again *\n" 
+								 + "**************************************");
 			}
 
 		} while (selection != 4);
@@ -83,25 +85,33 @@ public class FoodTruckApp {
 	}
 
 	public void averageRating(FoodTruck[] trucks) {
-		int tallyRatings = 0;
+		int counter = 0;
+		double avgRatings = 0;
+		double tallyRatings = 0;
 		for (FoodTruck foodTruck : trucks) {
 			if (foodTruck != null) {
 				tallyRatings = tallyRatings + foodTruck.getTruckRating();
-				double avgRatings = tallyRatings / trucks.length;
-				System.out.println("The average food truck rating is: " + avgRatings);
+				counter++;
 			}
 		}
-
+		avgRatings = tallyRatings / counter;
+		System.out.printf("The average food truck rating is: ");
+		System.out.printf("%.2f\n", avgRatings);
+		
 	}
 
 	public void highestRating(FoodTruck[] trucks) {
+		FoodTruck bestTruck = null;
 		int highestRating = 0;
 		for (FoodTruck foodTruck : trucks) {
-			if (highestRating < foodTruck.getTruckRating()) {
-				highestRating = foodTruck.getTruckRating();
+			if (foodTruck != null) {
+				if (highestRating < foodTruck.getTruckRating()) {
+					highestRating = foodTruck.getTruckRating();
+					bestTruck = foodTruck;
+				}
+			}
 		}
-			System.out.println("The Best Rated Truck is: " + highestRating + " Stars!");
-		}
+		System.out.println("The Best Rated Truck is: " + bestTruck);
 
 	}
 
